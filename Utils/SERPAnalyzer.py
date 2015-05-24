@@ -7,13 +7,16 @@ from bs4 import BeautifulSoup
 def add_character_bounding_box(results):
     res =[]
     _id = 0
+    count = 0
     for result in results:
-        _id, html = process_result(_id, result.content)
+        count = count + 1
+        _id, html = process_result(count, _id, result.content)
+        res.append('<h2>  结果%d </h2>' % count)
         res.append(html)
     return res
 
 
-def process_result(_id, result):
+def process_result(count, _id, result):
     soup = BeautifulSoup(result)
     div = soup.find('div')
     #change title
@@ -38,6 +41,7 @@ def process_tag(_id, html, tag_name):
     new_str = u''
     tmp_str = u''
     level = 0
+    print('old_str : %s\n' % old_str)
     for c in old_str:
         if c == u'<':
             level += 1

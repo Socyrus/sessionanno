@@ -13,7 +13,7 @@ searchRes = p.findall(html)
 
 outputFile = open('result.txt', 'w')
 count = 0
-maxCount = 2  #how many htmls will you create?
+maxCount = 2 #how many htmls will you create?
 htmls = []
 for a in searchRes:
     count = count + 1
@@ -24,7 +24,8 @@ for a in searchRes:
 
     response = urllib2.urlopen(url)
     html = response.read()
-    htmls.append(html.replace('\n','')+'\n')
+    html = html.replace('\n','').replace('onclick','nouse')+'\n'
+    htmls.append(html)
 
     if count == maxCount:
         break
